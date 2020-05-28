@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RateReview index{% endblock %}
+
+{% block body %}
+    <h1>RateReview index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Note</th>
+                <th>Review</th>
+                <th>PublishDate</th>
+                <th>Publish</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rate_review in rate_reviews %}
+            <tr>
+                <td>{{ rate_review.id }}</td>
+                <td>{{ rate_review.name }}</td>
+                <td>{{ rate_review.email }}</td>
+                <td>{{ rate_review.note }}</td>
+                <td>{{ rate_review.review }}</td>
+                <td>{{ rate_review.publishDate ? rate_review.publishDate|date('Y-m-d') : '' }}</td>
+                <td>{{ rate_review.publish ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('rate_review_show', {'id': rate_review.id}) }}">show</a>
+                    <a href="{{ path('rate_review_edit', {'id': rate_review.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rate_review_new') }}">Create new</a>
+{% endblock %}

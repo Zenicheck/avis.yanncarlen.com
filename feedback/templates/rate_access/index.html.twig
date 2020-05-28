@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RateAccess index{% endblock %}
+
+{% block body %}
+    <h1>RateAccess index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Uniq</th>
+                <th>Open</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rate_access in rate_accesses %}
+            <tr>
+                <td>{{ rate_access.id }}</td>
+                <td>{{ rate_access.uniq }}</td>
+                <td>{{ rate_access.open ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('rate_access_show', {'id': rate_access.id}) }}">show</a>
+                    <a href="{{ path('rate_access_edit', {'id': rate_access.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rate_access_new') }}">Create new</a>
+{% endblock %}
